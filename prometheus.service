@@ -1,0 +1,14 @@
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+Type=simple
+ExecStart=/home/ubuntu/prometheus-file2/prometheus \
+--config.file /home/ubuntu/prometheus-file2/prometheus.yml \
+--storage.tsdb.path /home/ubuntu/prometheus-file2/db/  
+[Install]
+WantedBy=multi-user.target

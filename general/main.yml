@@ -1,0 +1,6 @@
+---
+- name: My Ansible Playbook
+  hosts: myserver
+  roles:
+      - role: '/home/dungnv/work-space/ansible/general/roles/prometheus'
+      - role: 'alertmanager'

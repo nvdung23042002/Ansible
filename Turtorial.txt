@@ -1,0 +1,10 @@
+Link 1: https://cloudcraft.info/ansible-huong-dan-su-dung-va-quan-ly-role-trong-ansible/
+
+- Module 'command' cannot write as list, instead of that we use 'shell', shell dont have '-'
+- Recommand just use module 'shell' or 'command'
+- run simulator before apply to the hosts: 'ansible-playbook -C your_playbook.yml'
+
+- ansible Role:
+    +, The Ansible Role structure must similar with above axample: Playbook.yml and 'roles' folder have the same layer. 
+    +, The name of task in ansible role must be named: main.yml
+    +, You can go back all a Tab space by 'Ctrl + ['

@@ -1,0 +1,33 @@
+---
+
+- name: Install source
+  shell:  |
+    curl -O -L https://github.com/prometheus/prometheus/releases/download/v2.47.1/prometheus-2.47.1.linux-amd64.tar.gz
+    ls -la
+  register: test
+
+- debug:
+    var: test.stdout_lines
+
+
+- name: Unzip source
+  shell:  |
+    tar -xzf prometheus-2.47.1.linux-amd64.tar.gz
+    mkdir prometheus-file2
+    mv prometheus-2.47.1.linux-amd64/* prometheus-file2
+    mkdir prometheus-file2/db
+
+- name: Change systemd process
+  become: yes
+  copy:
+    src: prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+
+
+- name: reload prometheus service
+  become: yes
+  shell:  |
+    systemctl daemon-reload
+    systemctl start prometheus
+    systemctl enable prometheus
+    systemctl status prometheus

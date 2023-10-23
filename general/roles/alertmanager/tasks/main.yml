@@ -1,0 +1,32 @@
+  - name: Install source
+    shell:  |
+      curl -O -L https://github.com/prometheus/alertmanager/releases/download/v0.26.0/alertmanager-0.26.0.linux-amd64.tar.gz
+      ls -la
+    register: download
+
+  - debug:
+      var: download.stdout_lines
+
+
+  - name: Unzip source
+    become: yes
+    shell:  |
+      tar -xzf prometheus-2.47.1.linux-amd64.tar.gz
+      mkdir prometheus-file2
+      mv alertmanager-0.26.0.linux-amd64 /usr/local/alertmanager
+
+
+  - name: Change systemd process
+    become: yes
+    copy:
+      src: alertmanager.service
+      dest: /etc/systemd/system/alertmanager.service
+
+
+  - name: reload prometheus service
+    become: yes
+    shell:  |
+      systemctl daemon-reload
+      systemctl start alertmanager
+      systemctl enable alertmanager
+      systemctl status alertmanager
