@@ -4,11 +4,11 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-User=ubuntu
-Group=ubuntu
+User=prometheus
+Group=prometheus
 Type=simple
-ExecStart=/home/ubuntu/prometheus-file2/prometheus \
---config.file /home/ubuntu/prometheus-file2/prometheus.yml \
---storage.tsdb.path /home/ubuntu/prometheus-file2/db/  
+ExecStart=/usr/local/prometheus-file/prometheus \
+--config.file /usr/local/prometheus-file/prometheus.yml \
+--storage.tsdb.path /usr/local/prometheus-file/db/  
 [Install]
 WantedBy=multi-user.target

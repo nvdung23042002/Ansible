@@ -11,11 +11,13 @@
 
 
 - name: Unzip source
+  become: yes
   shell:  |
     tar -xzf prometheus-2.47.1.linux-amd64.tar.gz
-    mkdir prometheus-file2
-    mv prometheus-2.47.1.linux-amd64/* prometheus-file2
-    mkdir prometheus-file2/db
+    mkdir -p /usr/local/prometheus-file
+    mv prometheus-2.47.1.linux-amd64/* /usr/local/prometheus-file
+    mkdir -p /usr/local/prometheus-file/db
+    chown -R prometheus:127 /usr/local/prometheus-file/db
 
 - name: Change systemd process
   become: yes
